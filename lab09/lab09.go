@@ -14,13 +14,13 @@ func main() {
 
 	c := colly.NewCollector()
 
-	commentCount := 0 // 用于跟踪打印的评论数量
+	commentCount := 0 
 
 	c.OnHTML(".push", func(e *colly.HTMLElement) {
-		if commentCount < *maxComments { // 检查打印的评论数量是否超过了指定的最大数量
-			name := e.ChildText(".push-userid") // 获取评论者的姓名
-			content := strings.TrimSpace(e.ChildText(".push-content")) // 获取评论内容
-			time := e.ChildText(".push-ipdatetime") // 获取评论时间
+		if commentCount < *maxComments { 
+			name := e.ChildText(".push-userid") 
+			content := strings.TrimSpace(e.ChildText(".push-content")) 
+			time := e.ChildText(".push-ipdatetime") 
 			if name != "" && content != "" && time != "" {
 				commentCount++
 				fmt.Printf("%d. 名字：%s，留言%s，時間： %s\n", commentCount, name, content, time)
